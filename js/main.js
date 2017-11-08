@@ -2,6 +2,8 @@ create();
 var camera,tower,centerlat,centerlng,points = [];
 var latlngscale = 1;
 var pointSize = .01;
+//set heigh, low, and middle db levels and rang
+var dbheigh = 20, dblow = -20, dbmed = (dbheigh + dblow) / 2, dbrange = dbheigh - dblow;
 
 function create(){
   sceneSetup();
@@ -71,13 +73,37 @@ function loadPoints(){
       var lat = point.lat;
       var lng = point.lng;
       var height = point.height;
+      var db = point.db;
       var pp = 100;
       //var p = createCube({x:(lat - centerlat)*pp,y:height / 1000,z:(lng - centerlng)*pp,sx:pointSize,sy:pointSize,sz:pointSize,material:"normal"});
-      console.log(height);
+
       var geometry = new THREE.SphereGeometry( pointSize * .5, 32, 32 );
       //var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+      var color = new THREE.Color( 0xffffff );
+      //var red = Math.floor((db - (dbrange / 2)) * ( 255 / dbrange * -1));
+      //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange));
+
+      //calculate green
+      if( db > dbmed ){
+        var green = 255;
+      }else{
+        //var green = Math.floor(255 /dbheigh * db);
+        var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange * 2));
+      }
+
+      //calculate red
+      if( db < dbmed ){
+        var red = 255;
+      }else{
+        var red = Math.floor((db - dbrange / 2) * ( 255 / dbrange * 2)*-1);
+      }
+
+
+      color.setRGB( red, green, 0 );
+      //console.log(red + " " + green + " " + 0);
+      console.log( db + " " + red + " " + green + " " + 0);
       var material = new THREE.LineBasicMaterial( {
-        color: 0xff0000,
+        color: color,
         transparent: true,
         opacity: 0.5
       } )

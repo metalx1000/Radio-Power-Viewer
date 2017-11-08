@@ -21,11 +21,12 @@ echo "[" > "$output"
 cat "$file"|grep '81.'|sed 's/ //g'|while read line
 do
   rand=$[$RANDOM % ${#high[@]}]
+  db="$(( ( RANDOM % 40 )  - 20 ))"
   date > /dev/null
   height=${high[$rand]}
   lat="$(echo "$line"|cut -d\, -f2)"
   lng="$(echo "$line"|cut -d\, -f1)"
-  echo -n "{\"lat\":$lat,\"lng\":$lng,\"height\":$height},"
+  echo -n "{\"lat\":$lat,\"lng\":$lng,\"height\":$height,\"db\":$db},"
 done|sed 's/,$//g'|sed 's/},/},\n/g' >> "$output"
 
 echo "" >> "$output"
