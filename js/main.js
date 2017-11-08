@@ -33,7 +33,7 @@ function create(){
     animate();
     //tower.position.set(0,0,0);
     camera.lookAt(tower.position)
-  },500);
+  },100);
 
 }
 
@@ -79,7 +79,7 @@ function loadPoints(){
 
       var geometry = new THREE.SphereGeometry( pointSize * .5, 32, 32 );
       //var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-      var color = new THREE.Color( 0xffffff );
+      //var color = new THREE.Color( 0xffffff );
       //var red = Math.floor((db - (dbrange / 2)) * ( 255 / dbrange * -1));
       //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange));
 
@@ -99,9 +99,10 @@ function loadPoints(){
       }
 
 
-      color.setRGB( red, green, 0 );
+      //color.setRGB( red, green, 0 );
+      var color = new THREE.Color("rgb("+red+", "+green+", 0)");
       //console.log(red + " " + green + " " + 0);
-      console.log( db + " " + red + " " + green + " " + 0);
+      //console.log( db + " " + red + " " + green + " " + 0);
       var material = new THREE.LineBasicMaterial( {
         color: color,
         transparent: true,
