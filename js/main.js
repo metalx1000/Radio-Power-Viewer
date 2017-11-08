@@ -67,9 +67,10 @@ function loadPoints(){
     data.forEach(function(point){
       var lat = point.lat;
       var lng = point.lng;
+      var hight = point.hight;
       var size = .01;
       var pp = 100;
-      var p = createCube({x:(lat - centerlat)*pp,y:0,z:(lng - centerlng)*pp,sx:size,sy:size,sz:size,material:"normal"});
+      var p = createCube({x:(lat - centerlat)*pp,y:hight / 1000,z:(lng - centerlng)*pp,sx:size,sy:size,sz:size,material:"normal"});
       p.lat = lat;
       p.lng = lng;
       points.push(p);
