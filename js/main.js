@@ -77,7 +77,7 @@ function loadPoints(){
       var pp = 100;
       //var p = createCube({x:(lat - centerlat)*pp,y:height / 1000,z:(lng - centerlng)*pp,sx:pointSize,sy:pointSize,sz:pointSize,material:"normal"});
 
-      var geometry = new THREE.SphereGeometry( pointSize * .5, 32, 32 );
+      var geometry = new THREE.SphereGeometry( pointSize * .5, 10, 10 );
       //var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
       //var color = new THREE.Color( 0xffffff );
       //var red = Math.floor((db - (dbrange / 2)) * ( 255 / dbrange * -1));
