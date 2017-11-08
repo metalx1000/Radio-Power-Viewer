@@ -1,2 +1,2 @@
-# Radio-Power-Viewer
-Maps out data caught by Radio Power
+# ThreeJS-Template
+A Basic Template for ThreeJS programs
