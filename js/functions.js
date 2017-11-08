@@ -89,7 +89,6 @@ function createCamera(d){
   if(typeof d.x === "undefined"){d.x = 2;}
   if(typeof d.y === "undefined"){d.y = 2;}
   if(typeof d.z === "undefined"){d.z = 3;}
-
   var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, .1, 1000);
   //camera.rotation.x = d.x;
   camera.position.set( d.x, d.y, d.z );
