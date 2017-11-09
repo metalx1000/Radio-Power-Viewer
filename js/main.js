@@ -33,11 +33,13 @@ function create(){
   var light = new THREE.AmbientLight( 0x404040 ); // soft white light
   scene.add( light );
 
+  controls.target = new THREE.Vector3(0, .2, 0);
+  camera.position.set(.4,.5,.4);
+  controls.update();
+  //createGrid({size:30, steps:.01, color: "black"}); 
   //start animation
   setTimeout(function(){
     animate();
-    //tower.position.set(0,0,0);
-    //camera.lookAt(tower.position)
   },100);
 
 }
@@ -132,6 +134,9 @@ function loadPoints(){
 
 //Click on point sphere
 function getClicked(){
+//  CLICKED.material.emissive.setHex( 0xff0000 );
+  if( LASTCLICKED != null){ LASTCLICKED.material.opacity = .5; }
+  CLICKED.material.opacity = 1;
   $("#info").html("GPS: " + CLICKED.lat + "," + CLICKED.lng + "<br>");
   $("#info").append("Height: " + CLICKED.height + "'<br>");
   $("#info").append("Signal Strength: " + CLICKED.db + "db");

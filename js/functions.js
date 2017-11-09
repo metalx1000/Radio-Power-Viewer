@@ -92,7 +92,7 @@ function createCamera(d){
   var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, .1, 1000);
   //camera.rotation.x = d.x;
   camera.position.set( d.x, d.y, d.z );
-  camera.lookAt(scene.position);
+  //camera.lookAt(scene.position);
   return camera;
 }
 
