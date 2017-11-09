@@ -24,13 +24,13 @@ function create(){
     CLICKABLE = meshList();
   },1000);
 
-  //loadTower();
+  loadTower();
   //Load DAE Scene
   loadDAE({scene:"untitled.dae"});
   loadPoints();
 
   //add lighting
-  var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+  var light = new THREE.AmbientLight( 0xf0f0f0 ); // soft white light
   scene.add( light );
 
   controls.target = new THREE.Vector3(0, .2, 0);
@@ -71,6 +71,7 @@ function loadTower(){
     tower = createCube({x:0,y:y, z:0,sx:pointSize,sy:height,sz:pointSize,material:"normal"});
     tower.lat = lat;
     tower.lng = lng;
+    tower.visible = false;
   });
 }
 
