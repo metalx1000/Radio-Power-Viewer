@@ -1,4 +1,5 @@
 create();
+
 var camera,tower,centerlat,centerlng,points = [];
 var latlngscale = 1;
 var pointSize = .01;
@@ -32,7 +33,7 @@ function create(){
     loadPoints();
     animate();
     //tower.position.set(0,0,0);
-    camera.lookAt(tower.position)
+    //camera.lookAt(tower.position)
   },100);
 
 }
@@ -114,9 +115,34 @@ function loadPoints(){
       p.lat = lat;
       p.lng = lng;
       points.push(p);
+      //Make Clickable
+      CLICKABLE.push(p);
       //tower.add(p);
 
       //console.log(p.position);   
     });
   });
 }
+
+//for all selected items
+function allSelected(){
+  CLICKGROUP.forEach(function(i){
+    if(i != null){
+      i.rotation.x+=.1;
+    }
+  });
+}
+
+//Control Panel
+var gui = new dat.GUI();
+var controlPanel = { scale: 1 }
+gui.add(controlPanel,"scale",.2,5,.1).onChange(scalePoints);
+
+function scalePoints(){
+  var s = controlPanel.scale;
+  points.forEach(function(p){
+    p.scale.set(s,s,s);
+  });
+}
+
+

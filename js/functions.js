@@ -166,6 +166,7 @@ var raycaster = new THREE.Raycaster();
 var mouse = new THREE.Vector2();
 document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 document.addEventListener( 'touchstart', onDocumentTouchStart, false );
+
 function onDocumentTouchStart( event ) {
   event.preventDefault();
   console.log("click");
@@ -175,7 +176,6 @@ function onDocumentTouchStart( event ) {
 }
 
 function onDocumentMouseDown( event ) {
-
   event.preventDefault();
   mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
   mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
@@ -185,6 +185,7 @@ function onDocumentMouseDown( event ) {
     LASTCLICKED = CLICKED;
     CLICKEDTIME = new Date().getTime();
     CLICKED = intersects[0].object;
+    console.log(CLICKED);
     add_remove(CLICKGROUP,CLICKED);
   }
 }
