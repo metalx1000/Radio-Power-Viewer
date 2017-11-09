@@ -26,11 +26,15 @@ function create(){
 
   loadTower();
   //Load DAE Scene
-  //loadDAE({scene:"talon.dae"});
+  loadDAE({scene:"untitled.dae"});
+  loadPoints();
+
+  //add lighting
+  var light = new THREE.AmbientLight( 0x404040 ); // soft white light
+  scene.add( light );
 
   //start animation
   setTimeout(function(){
-    loadPoints();
     animate();
     //tower.position.set(0,0,0);
     //camera.lookAt(tower.position)
