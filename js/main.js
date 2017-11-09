@@ -118,6 +118,8 @@ function loadPoints(){
       p.position.set((lat - centerlat)*pp,height / 1000,(lng - centerlng)*pp);
       p.lat = lat;
       p.lng = lng;
+      p.height = height;
+      p.db = db;
       points.push(p);
       //Make Clickable
       CLICKABLE.push(p);
@@ -128,14 +130,13 @@ function loadPoints(){
   });
 }
 
-//for all selected items
-function allSelected(){
-  CLICKGROUP.forEach(function(i){
-    if(i != null){
-      i.rotation.x+=.1;
-    }
-  });
+//Click on point sphere
+function getClicked(){
+  $("#info").html("GPS: " + CLICKED.lat + "," + CLICKED.lng + "<br>");
+  $("#info").append("Height: " + CLICKED.height + "'<br>");
+  $("#info").append("Signal Strength: " + CLICKED.db + "db");
 }
+
 
 //Control Panel
 var gui = new dat.GUI();

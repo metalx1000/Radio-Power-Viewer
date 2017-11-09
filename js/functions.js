@@ -175,6 +175,7 @@ function onDocumentTouchStart( event ) {
   onDocumentMouseDown( event );
 }
 
+var getClicked;
 function onDocumentMouseDown( event ) {
   event.preventDefault();
   mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
@@ -185,7 +186,7 @@ function onDocumentMouseDown( event ) {
     LASTCLICKED = CLICKED;
     CLICKEDTIME = new Date().getTime();
     CLICKED = intersects[0].object;
-    console.log(CLICKED);
+    getClicked();
     add_remove(CLICKGROUP,CLICKED);
   }
 }
