@@ -24,6 +24,8 @@ function create(){
     CLICKABLE = meshList();
   },1000);
 
+  loading();
+
   loadTower();
   //Load DAE Scene
   loadDAE({scene:"untitled.dae"});

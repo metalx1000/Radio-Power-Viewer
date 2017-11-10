@@ -107,6 +107,27 @@ function controlsFly(){
   controls.dragToLook = false;
 }
 
+var loadTEXT;
+function loading(d){
+  if(typeof d === "undefined"){d = {};}
+  if(typeof d.scene === "undefined"){d.scene = "loadtext.dae";}
+  var dae = "models/dae/" + d.scene;
+  console.log("loading "+dae);
+  var loader = new THREE.ColladaLoader();
+  loader.options.convertUpAxis = true;
+  loader.load( dae, function ( collada ) {
+    dae = collada.scene;
+    loadTEXT = dae;
+    scene.add(dae);
+    dae.position.y = .1;
+  });
+
+}
+
+function loaded(){
+  loadTEXT.visible = false;
+}
+
 var sceneDAE;
 function loadDAE(d){
   if(typeof d === "undefined"){d = {};}
@@ -121,6 +142,7 @@ function loadDAE(d){
     console.log("model loaded...");
     scene.add(dae);
     meshList();
+    loaded();
   });
 
 }
