@@ -118,6 +118,7 @@ function loadDAE(d){
   loader.load( dae, function ( collada ) {
     dae = collada.scene;
     sceneDAE = dae;
+    console.log("model loaded...");
     scene.add(dae);
     meshList();
   });
