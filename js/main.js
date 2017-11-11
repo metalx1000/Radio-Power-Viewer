@@ -111,7 +111,7 @@ function loadPoints(){
         var red = 255;
       }else{
         //var red = Math.floor((db - dbrange / 2) * ( 255 / dbrange * 2)*-1);
-        
+
         var red = Math.floor(255 - (dbp * 2));
       }
 
@@ -132,6 +132,7 @@ function loadPoints(){
       p.lng = lng;
       p.height = height;
       p.db = db;
+      p.point = true;
       points.push(p);
       //Make Clickable
       CLICKABLE.push(p);
@@ -144,14 +145,16 @@ function loadPoints(){
 
 //Click on point sphere
 function getClicked(){
-//  CLICKED.material.emissive.setHex( 0xff0000 );
-  if( LASTCLICKED != null){ LASTCLICKED.material.opacity = .5; }
-  CLICKED.material.opacity = 1;
-  controlPanel.GPS = CLICKED.lat + "," + CLICKED.lng;
-  controlPanel.Height = CLICKED.height + " feet";
-  controlPanel.Strength = CLICKED.db + "db";
-  gui.updateDisplay();
-  gui.open();
+  //  CLICKED.material.emissive.setHex( 0xff0000 );
+  if( CLICKED.point ){
+    if( LASTCLICKED != null){ LASTCLICKED.material.opacity = .5; }
+    CLICKED.material.opacity = 1;
+    controlPanel.GPS = CLICKED.lat + "," + CLICKED.lng;
+    controlPanel.Height = CLICKED.height + " feet";
+    controlPanel.Strength = CLICKED.db + "db";
+    gui.updateDisplay();
+    gui.open();
+  }
 }
 
 
