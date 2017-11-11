@@ -21,7 +21,7 @@ echo "[" > "$output"
 cat "$file"|grep '81.'|sed 's/ //g'|while read line
 do
   rand=$[$RANDOM % ${#high[@]}]
-  db="$(( ( RANDOM % 40 )  - 20 ))"
+  db="$(( ( RANDOM % 30 )  - 90 ))"
   date > /dev/null
   height=${high[$rand]}
   lat="$(echo "$line"|cut -d\, -f2)"

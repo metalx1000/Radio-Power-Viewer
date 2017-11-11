@@ -4,7 +4,7 @@ var camera,tower,centerlat,centerlng,points = [];
 var latlngscale = 1;
 var pointSize = .01;
 //set heigh, low, and middle db levels and rang
-var dbheigh = 20, dblow = -20, dbmed = (dbheigh + dblow) / 2, dbrange = dbheigh - dblow;
+var dbheigh = -60, dblow = -90, dbmed = (dbheigh + dblow) / 2, dbrange = dbheigh - dblow;
 
 function create(){
   sceneSetup();
@@ -92,27 +92,34 @@ function loadPoints(){
       //var color = new THREE.Color( 0xffffff );
       //var red = Math.floor((db - (dbrange / 2)) * ( 255 / dbrange * -1));
       //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange));
+      //dbp is percentage of db between high and low
+      var dbp = (db + Math.abs(dblow))*(100/Math.abs(dbheigh)*2);
 
       //calculate green
-      if( db > dbmed ){
+      if( dbp > 50 ){
         var green = 255;
       }else{
         //var green = Math.floor(255 /dbheigh * db);
-        var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange * 2));
+        //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange * 2));
+        console.log(dbp);
+        //5 is 1% of 255 (abouti)
+        var green = Math.floor((dbp * 5) );
       }
 
       //calculate red
-      if( db < dbmed ){
+      if( dbp < 50 ){
         var red = 255;
       }else{
-        var red = Math.floor((db - dbrange / 2) * ( 255 / dbrange * 2)*-1);
+        //var red = Math.floor((db - dbrange / 2) * ( 255 / dbrange * 2)*-1);
+        
+        var red = Math.floor(255 - (dbp * 2));
       }
 
 
       //color.setRGB( red, green, 0 );
       var color = new THREE.Color("rgb("+red+", "+green+", 0)");
       //console.log(red + " " + green + " " + 0);
-      //console.log( db + " " + red + " " + green + " " + 0);
+      console.log( db + " " + red + " " + green + " " + 0);
       var material = new THREE.LineBasicMaterial( {
         color: color,
         transparent: true,
