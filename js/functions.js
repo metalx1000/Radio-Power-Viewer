@@ -109,6 +109,8 @@ function controlsFly(){
 
 var loadTEXT;
 function loading(d){
+  $("#info").html("<h1>LOADING...</h1>");
+/*
   if(typeof d === "undefined"){d = {};}
   if(typeof d.scene === "undefined"){d.scene = "loadtext.dae";}
   var dae = "models/dae/" + d.scene;
@@ -121,11 +123,12 @@ function loading(d){
     scene.add(dae);
     dae.position.y = .1;
   });
-
+*/
 }
 
 function loaded(){
-  loadTEXT.visible = false;
+  //loadTEXT.visible = false;
+  $("#info").html("");
 }
 
 var sceneDAE;
