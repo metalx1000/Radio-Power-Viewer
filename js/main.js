@@ -143,12 +143,14 @@ function getClicked(){
   controlPanel.GPS = CLICKED.lat + "," + CLICKED.lng;
   controlPanel.Height = CLICKED.height + " feet";
   controlPanel.Strength = CLICKED.db + "db";
-  gui.updateDisplay()
+  gui.updateDisplay();
+  gui.open();
 }
 
 
 //Control Panel
 var gui = new dat.GUI();
+gui.close();
 var controlPanel = { 
   scale: 1, 
   GPS:"0,0",

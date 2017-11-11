@@ -109,7 +109,7 @@ function controlsFly(){
 
 var loadTEXT;
 function loading(d){
-  $("#info").html("<h1>LOADING...</h1>");
+  $("#info").html("<br><br><h1>LOADING...</h1>");
 /*
   if(typeof d === "undefined"){d = {};}
   if(typeof d.scene === "undefined"){d.scene = "loadtext.dae";}
