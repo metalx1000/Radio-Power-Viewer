@@ -88,10 +88,6 @@ function loadPoints(){
       //var p = createCube({x:(lat - centerlat)*pp,y:height / 1000,z:(lng - centerlng)*pp,sx:pointSize,sy:pointSize,sz:pointSize,material:"normal"});
 
       var geometry = new THREE.SphereGeometry( pointSize * .5, 10, 10 );
-      //var material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
-      //var color = new THREE.Color( 0xffffff );
-      //var red = Math.floor((db - (dbrange / 2)) * ( 255 / dbrange * -1));
-      //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange));
       //dbp is percentage of db between high and low
       var dbp = (db + Math.abs(dblow))*(100/Math.abs(dbheigh)*2);
 
@@ -99,10 +95,8 @@ function loadPoints(){
       if( dbp > 50 ){
         var green = 255;
       }else{
-        //var green = Math.floor(255 /dbheigh * db);
-        //var green = Math.floor((db + dbrange / 2) * ( 255 / dbrange * 2));
         console.log(dbp);
-        //5 is 1% of 255 (abouti)
+        //5 is 1% of 255 (about)
         var green = Math.floor((dbp * 5) );
       }
 
@@ -110,8 +104,6 @@ function loadPoints(){
       if( dbp < 50 ){
         var red = 255;
       }else{
-        //var red = Math.floor((db - dbrange / 2) * ( 255 / dbrange * 2)*-1);
-
         var red = Math.floor(255 - (dbp * 2));
       }
 
