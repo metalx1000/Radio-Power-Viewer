@@ -191,8 +191,8 @@ document.addEventListener( 'mousedown', onDocumentMouseDown, false );
 document.addEventListener( 'touchstart', onDocumentTouchStart, false );
 
 function onDocumentTouchStart( event ) {
-  event.preventDefault();
-  console.log("click");
+  //event.preventDefault();
+  //console.log("click");
   event.clientX = event.touches[0].clientX;
   event.clientY = event.touches[0].clientY;
   onDocumentMouseDown( event );

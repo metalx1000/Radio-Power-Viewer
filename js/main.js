@@ -140,16 +140,26 @@ function getClicked(){
 //  CLICKED.material.emissive.setHex( 0xff0000 );
   if( LASTCLICKED != null){ LASTCLICKED.material.opacity = .5; }
   CLICKED.material.opacity = 1;
-  $("#info").html("GPS: " + CLICKED.lat + "," + CLICKED.lng + "<br>");
-  $("#info").append("Height: " + CLICKED.height + "'<br>");
-  $("#info").append("Signal Strength: " + CLICKED.db + "db");
+  controlPanel.GPS = CLICKED.lat + "," + CLICKED.lng;
+  controlPanel.Height = CLICKED.height + " feet";
+  controlPanel.Strength = CLICKED.db + "db";
+  gui.updateDisplay()
 }
 
 
 //Control Panel
 var gui = new dat.GUI();
-var controlPanel = { scale: 1 }
+var controlPanel = { 
+  scale: 1, 
+  GPS:"0,0",
+  Height: "0",
+  Strength: "0"
+}
+
 gui.add(controlPanel,"scale",.2,5,.1).onChange(scalePoints);
+gui.add(controlPanel,"GPS");
+gui.add(controlPanel,"Height");
+gui.add(controlPanel,"Strength");
 
 function scalePoints(){
   var s = controlPanel.scale;
