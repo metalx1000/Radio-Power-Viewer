@@ -129,6 +129,7 @@ function loading(d){
 function loaded(){
   //loadTEXT.visible = false;
   $("#info").html("");
+  $("#loader").hide();
 }
 
 var sceneDAE;
