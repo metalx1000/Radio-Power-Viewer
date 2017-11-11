@@ -34,11 +34,14 @@
 	border-top: 16px solid #3498db;
 	width: 120px;
 	height: 120px;
-	top: 200px;
-	left: 45%; 
+        top: 200px;
+        left: -webkit-calc(50% - 70px);
+        left: -moz-calc(50% - 70px);
+        left: calc(50% - 70px);
+        margin: 0 auto;
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
-	position: absolute;
+	position: fixed;
       }
 
       @-webkit-keyframes spin {
@@ -54,7 +57,9 @@
   </head>
   <body>
     <div id="info"></div>
-    <div id="loader"></div>
+    <div class="row">
+      <div id="loader" ></div>
+    </div>
 
     <script src="libs/jquery-3.1.1.min.js"></script>
     <script src="libs/three.min.js"></script>
