@@ -74,6 +74,8 @@ function loadTower(){
     tower.lat = lat;
     tower.lng = lng;
     tower.visible = false;
+    controlPanel.TowerGPS = lat + "," + lng;
+    gui.updateDisplay();
   });
 }
 
@@ -144,6 +146,7 @@ function getClicked(){
     controlPanel.Height = CLICKED.height + " feet";
     controlPanel.Strength = CLICKED.db + "db";
     gui.updateDisplay();
+    pointInfo.open();
     gui.open();
   }
 }
@@ -156,13 +159,20 @@ var controlPanel = {
   scale: 1, 
   GPS:"0,0",
   Height: "0",
-  Strength: "0"
+  Strength: "0",
+  TowerGPS: "0"
 }
 
-gui.add(controlPanel,"scale",.2,5,.1).onChange(scalePoints);
-gui.add(controlPanel,"GPS");
-gui.add(controlPanel,"Height");
-gui.add(controlPanel,"Strength");
+var controls = gui.addFolder('Controls');
+controls.add(controlPanel,"scale",.2,5,.1).onChange(scalePoints);
+
+var towerInfo = gui.addFolder('Tower Information');
+towerInfo.add(controlPanel,"TowerGPS");
+
+var pointInfo = gui.addFolder('Point Information');
+pointInfo.add(controlPanel,"GPS");
+pointInfo.add(controlPanel,"Height");
+pointInfo.add(controlPanel,"Strength");
 
 function scalePoints(){
   var s = controlPanel.scale;
