@@ -95,7 +95,6 @@ function loadPoints(){
       if( dbp > 50 ){
         var green = 255;
       }else{
-        console.log(dbp);
         //5 is 1% of 255 (about)
         var green = Math.floor((dbp * 5) );
       }
@@ -111,7 +110,7 @@ function loadPoints(){
       //color.setRGB( red, green, 0 );
       var color = new THREE.Color("rgb("+red+", "+green+", 0)");
       //console.log(red + " " + green + " " + 0);
-      console.log( db + " " + red + " " + green + " " + 0);
+      //console.log( db + " " + red + " " + green + " " + 0);
       var material = new THREE.LineBasicMaterial( {
         color: color,
         transparent: true,
