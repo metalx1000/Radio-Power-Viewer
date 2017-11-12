@@ -154,21 +154,38 @@ function getClicked(){
   }
 }
 
+//point steps
+//Shows every 'x' points
+function pointSteps(){
+  var x = controlPanel.Point_Steps;
+  points.forEach(function(p){
+    p.visible = false;
+  });
+
+  for(var i=0;i < points.length;i+=x){
+    if(points[i].visible !== undefined){
+      points[i].visible = true;
+    }
+  }
+}
 
 //Control Panel
 var gui = new dat.GUI();
 gui.close();
 var controlPanel = { 
-  scale: 1, 
+  Scale: 1, 
   GPS:"0,0",
   Height: "0",
   Strength: "0",
   Distance: "0",
+
+  Point_Steps: 1,
   TowerGPS: "0"
 }
 
 var controls = gui.addFolder('Controls');
-controls.add(controlPanel,"scale",.2,5,.1).onChange(scalePoints);
+controls.add(controlPanel,"Scale",.2,5,.1).onChange(scalePoints);
+controls.add(controlPanel,"Point_Steps",1,10,1).onChange(pointSteps);
 
 var towerInfo = gui.addFolder('Tower Information');
 towerInfo.add(controlPanel,"TowerGPS");
@@ -180,7 +197,7 @@ pointInfo.add(controlPanel,"Distance");
 pointInfo.add(controlPanel,"Strength");
 
 function scalePoints(){
-  var s = controlPanel.scale;
+  var s = controlPanel.Scale;
   points.forEach(function(p){
     p.scale.set(s,s,s);
   });
