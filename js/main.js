@@ -145,6 +145,9 @@ function getClicked(){
     controlPanel.GPS = CLICKED.lat + "," + CLICKED.lng;
     controlPanel.Height = CLICKED.height + " feet";
     controlPanel.Strength = CLICKED.db + "db";
+    var dis = getDis(tower.lat,tower.lng,CLICKED.lat,CLICKED.lng, "F");
+    dis = Math.floor(dis);
+    controlPanel.Distance = dis + " Feet from Tower";
     gui.updateDisplay();
     pointInfo.open();
     gui.open();
@@ -160,6 +163,7 @@ var controlPanel = {
   GPS:"0,0",
   Height: "0",
   Strength: "0",
+  Distance: "0",
   TowerGPS: "0"
 }
 
@@ -172,6 +176,7 @@ towerInfo.add(controlPanel,"TowerGPS");
 var pointInfo = gui.addFolder('Point Information');
 pointInfo.add(controlPanel,"GPS");
 pointInfo.add(controlPanel,"Height");
+pointInfo.add(controlPanel,"Distance");
 pointInfo.add(controlPanel,"Strength");
 
 function scalePoints(){
@@ -181,4 +186,20 @@ function scalePoints(){
   });
 }
 
-
+//get distance between two GPS points
+function getDis(lat1, lon1, lat2, lon2, unit) {
+  var radlat1 = Math.PI * lat1/180
+  var radlat2 = Math.PI * lat2/180
+  var radlon1 = Math.PI * lon1/180
+  var radlon2 = Math.PI * lon2/180
+  var theta = lon1-lon2
+  var radtheta = Math.PI * theta/180
+  var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+  dist = Math.acos(dist)
+  dist = dist * 180/Math.PI
+  dist = dist * 60 * 1.1515
+  if (unit=="K") { dist = dist * 1.609344 }
+  if (unit=="N") { dist = dist * 0.8684 }
+  if (unit=="F") { dist = dist * 5280 }      
+  return dist
+}
