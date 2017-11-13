@@ -79,6 +79,33 @@ function loadTower(){
   });
 }
 
+function objColor(obj){
+  //dbp is percentage of db between high and low
+  var dbp = (obj.db + Math.abs(dblow))*(100/Math.abs(dbheigh)*2);
+
+  //calculate green
+  if( dbp > 50 ){
+    var green = 255;
+  }else{
+    //5 is 1% of 255 (about)
+    var green = Math.floor((dbp * 5) );
+  }
+
+  //calculate red
+  if( dbp < 50 ){
+    var red = 255;
+  }else{
+    var red = Math.floor(255 - (dbp * 2));
+  }
+
+
+  //color.setRGB( red, green, 0 );
+  //console.log(red + " " + green + " " + 0);
+  //console.log( db + " " + red + " " + green + " " + 0);
+  var color = new THREE.Color("rgb("+red+", "+green+", 0)");
+  return color;
+}
+
 function loadPoints(){
   $.getJSON('data/points.json',function(data){
     data.forEach(function(point){
@@ -90,29 +117,7 @@ function loadPoints(){
       //var p = createCube({x:(lat - centerlat)*pp,y:height / 1000,z:(lng - centerlng)*pp,sx:pointSize,sy:pointSize,sz:pointSize,material:"normal"});
 
       var geometry = new THREE.SphereGeometry( pointSize * .5, 10, 10 );
-      //dbp is percentage of db between high and low
-      var dbp = (db + Math.abs(dblow))*(100/Math.abs(dbheigh)*2);
-
-      //calculate green
-      if( dbp > 50 ){
-        var green = 255;
-      }else{
-        //5 is 1% of 255 (about)
-        var green = Math.floor((dbp * 5) );
-      }
-
-      //calculate red
-      if( dbp < 50 ){
-        var red = 255;
-      }else{
-        var red = Math.floor(255 - (dbp * 2));
-      }
-
-
-      //color.setRGB( red, green, 0 );
-      var color = new THREE.Color("rgb("+red+", "+green+", 0)");
-      //console.log(red + " " + green + " " + 0);
-      //console.log( db + " " + red + " " + green + " " + 0);
+      var color = objColor(point);
       var material = new THREE.LineBasicMaterial( {
         color: color,
         transparent: true,
