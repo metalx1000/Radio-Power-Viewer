@@ -79,6 +79,7 @@ function loadTower(){
   });
 }
 
+//returns colored material for objects based on db level.
 function objColor(obj){
   //dbp is percentage of db between high and low
   var dbp = (obj.db + Math.abs(dblow))*(100/Math.abs(dbheigh)*2);
@@ -103,7 +104,13 @@ function objColor(obj){
   //console.log(red + " " + green + " " + 0);
   //console.log( db + " " + red + " " + green + " " + 0);
   var color = new THREE.Color("rgb("+red+", "+green+", 0)");
-  return color;
+
+  var material = new THREE.LineBasicMaterial( {
+    color: color,
+    transparent: true,
+    opacity: 0.5
+  } )
+  return material;
 }
 
 function loadPoints(){
@@ -117,12 +124,7 @@ function loadPoints(){
       //var p = createCube({x:(lat - centerlat)*pp,y:height / 1000,z:(lng - centerlng)*pp,sx:pointSize,sy:pointSize,sz:pointSize,material:"normal"});
 
       var geometry = new THREE.SphereGeometry( pointSize * .5, 10, 10 );
-      var color = objColor(point);
-      var material = new THREE.LineBasicMaterial( {
-        color: color,
-        transparent: true,
-        opacity: 0.5
-      } )
+      var material = objColor(point);
       var p = new THREE.Mesh( geometry, material );
       scene.add( p );
       p.position.set((lat - centerlat)*pp,height / 1000,(lng - centerlng)*pp);
@@ -131,12 +133,12 @@ function loadPoints(){
       p.height = height;
       p.db = db;
       p.point = true;
+
+      //add to points group
       points.push(p);
+
       //Make Clickable
       CLICKABLE.push(p);
-      //tower.add(p);
-
-      //console.log(p.position);   
     });
   });
 }
