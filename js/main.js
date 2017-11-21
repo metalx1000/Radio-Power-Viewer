@@ -246,6 +246,7 @@ function loadCompass(){
     var material = new THREE.MeshNormalMaterial();
     compass.material = material;
     compass.position.set(-.5,0,.1);
+    compass.rotation.y = (-90 * Math.PI)/180; //rotate compass -90degrees
     //compass.scale.set(.1,.1,.1);
     meshList();
     //loaded();
