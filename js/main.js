@@ -39,10 +39,6 @@ function create(){
   camera.position.set(.4,.5,.4);
   controls.update();
   //createGrid({size:30, steps:.01, color: "black"}); 
-  //start animation
-  setTimeout(function(){
-    animate();
-  },100);
 
 }
 
@@ -59,7 +55,7 @@ function animate(){
   renderer.render(scene, camera);
   requestAnimationFrame(function(){
     animate();
-    updateCompass();
+    //updateCompass();
   });
 }
 
@@ -238,28 +234,51 @@ function getDis(lat1, lon1, lat2, lon2, unit) {
 //directional objects
 var compass;
 function loadCompass(){
+  dae = "models/dae/compass.dae";
+  console.log("loading "+dae);
+  var loader = new THREE.ColladaLoader();
+  loader.options.convertUpAxis = true;
+  loader.load( dae, function ( collada ) {
+    dae = collada.scene;
+    compass = dae.children[0].children[0];
+    console.log("compass loaded...");
+    scene.add(dae);
+    var material = new THREE.MeshNormalMaterial();
+    compass.material = material;
+    compass.position.set(-.5,0,.1);
+    //compass.scale.set(.1,.1,.1);
+    meshList();
+    //loaded();
+    animate();
+  });
+}
+
+function loadArrow(){
   dae = "models/dae/arrow.dae";
   console.log("loading "+dae);
   var loader = new THREE.ColladaLoader();
   loader.options.convertUpAxis = true;
   loader.load( dae, function ( collada ) {
     dae = collada.scene;
-    //compass = dae.children[0];
-    compass = dae;
+    compass = dae.children[0].children[0];
     console.log("model loaded...");
     scene.add(dae);
-    compass.scale.set(.1,.1,.1);
+    var material = new THREE.MeshNormalMaterial();
+    compass.material = material;
+    //compass.scale.set(.1,.1,.1);
     meshList();
     //loaded();
+    animate();
   });
 
 }
 
 function updateCompass(){
-  var zCamVec = new THREE.Vector3(-.07,-.04,-.15);
+  var zCamVec = new THREE.Vector3(-.1,-.1,0);
   var position = camera.localToWorld(zCamVec);
 
   compass.position.set(position.x, position.y, position.z);
   compass.lookAt(tower.position);
+  //compass.translateZ(.1);
   return 0;
 }
