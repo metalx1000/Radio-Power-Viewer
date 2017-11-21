@@ -29,7 +29,7 @@ function create(){
   loadTower();
   //Load DAE Scene
   loadDAE({scene:"untitled.dae"});
-  loadPoints();
+  //loadPoints();
 
   //add lighting
   var light = new THREE.AmbientLight( 0xf0f0f0 ); // soft white light
@@ -76,7 +76,7 @@ function loadTower(){
     tower.visible = false;
     controlPanel.TowerGPS = lat + "," + lng;
     gui.updateDisplay();
-  });
+  }).done(loadPoints);
 }
 
 //returns colored material for objects based on db level.
