@@ -66,6 +66,7 @@ function loadTower(){
   $.get('data/center.dat',function(data){
     var lat = data.split(',')[0];
     var lng = data.split(',')[1];
+    var Tower_Height = data.split(',')[2];
     centerlat = lat;
     centerlng = lng;
     var height = 300 / 100 / 8;
@@ -73,8 +74,10 @@ function loadTower(){
     tower = createCube({x:0,y:y, z:0,sx:pointSize,sy:height,sz:pointSize,material:"normal"});
     tower.lat = lat;
     tower.lng = lng;
+    tower.height = Tower_Height;
     tower.visible = false;
     controlPanel.TowerGPS = lat + "," + lng;
+    controlPanel.Tower_Height = Tower_Height + " feet";
     gui.updateDisplay();
   }).done(loadPoints);
 }
@@ -187,7 +190,8 @@ var controlPanel = {
   Distance: "0",
 
   Point_Steps: 1,
-  TowerGPS: "0"
+  TowerGPS: "0",
+  Tower_Height: "0"
 }
 
 var controls = gui.addFolder('Controls');
@@ -196,6 +200,7 @@ controls.add(controlPanel,"Point_Steps",1,10,1).onChange(pointSteps);
 
 var towerInfo = gui.addFolder('Tower Information');
 towerInfo.add(controlPanel,"TowerGPS");
+towerInfo.add(controlPanel,"Tower_Height");
 
 var pointInfo = gui.addFolder('Point Information');
 pointInfo.add(controlPanel,"GPS");
