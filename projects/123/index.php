@@ -12,19 +12,20 @@
     <script>
       $(document).ready(function(){
         $("#stop").hide();
+        checkHeight();
         checkStatus();
         setInterval(checkStatus,3000);
 
         //start logging
         $("#start").click(function(){
-          $.get('change_status.php?status=true',function(data){
+          $.get('change_status.php?status=true&height='+$("#height").val(),function(data){
             $("#start").hide();
           });
         });
 
         //stop logging
         $("#stop").click(function(){
-          $.get('change_status.php?status=false',function(data){
+          $.get('change_status.php?status=false&height='+$("#height").val(),function(data){
             $("#stop").hide();
           });
         });
@@ -41,6 +42,13 @@
             $("#stop").hide();
           }
         });
+
+      }
+
+      function checkHeight(){
+        $.get('height.php',function(height){
+          $("#height").val(height);
+        });
       }
     </script>
   </head>
@@ -51,7 +59,7 @@
       <div class="row">
         <div class="col-md-12 form-group">
           <label for="feet">Height in Feet:</label>
-          <input type="number" class="form-control" id="feet" value="100">
+          <input type="number" class="form-control" id="height" value="100">
         </div>
         <button id="start" type="button" class="btn btn-primary btn-block">start</button>
         <button id="stop" type="button" class="btn btn-primary btn-block">stop</button>
