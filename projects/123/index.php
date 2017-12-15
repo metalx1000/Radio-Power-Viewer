@@ -15,6 +15,7 @@
         checkHeight();
         checkStatus();
         setInterval(checkStatus,3000);
+        setInterval(checkLog,1000);
 
         //start logging
         $("#start").click(function(){
@@ -37,7 +38,7 @@
           if(status == "true"){
             $("#start").hide();
             $("#stop").show();
-          }else{
+            }else{
             $("#start").show();
             $("#stop").hide();
           }
@@ -50,6 +51,31 @@
           $("#height").val(height);
         });
       }
+
+      function checkLog(){
+        $.get('checkLog.php',function(data){
+          console.log(data);
+          var time = data.split("|")[0];
+          var d = new Date(time * 1000);
+          var time = d.toLocaleString();
+
+          var GPS=data.split("|")[1].split(" ")[6];
+          var strength=data.split("|")[2] + "|" + data.split("|")[3];
+          var height=data.split("|")[4];
+          $("#output").html("Height: " + height + " feet");
+          $("#output").append("<br>GPS: " + GPS);
+          $("#output").append("<br>Strength:" + strength);
+          $("#output").append("<br>Time Stamp:" + time);
+        });
+      }
+
+      //decode base64 string
+      function b64D(str) {
+        // Going backwards: from bytestream, to percent-encoding, to original string.
+        return decodeURIComponent(atob(str).split('').map(function(c) {
+          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+      }
     </script>
   </head>
   <body>
@@ -61,8 +87,23 @@
           <label for="feet">Height in Feet:</label>
           <input type="number" class="form-control" id="height" value="100">
         </div>
-        <button id="start" type="button" class="btn btn-primary btn-block">start</button>
-        <button id="stop" type="button" class="btn btn-primary btn-block">stop</button>
+        <div class="col-md-12 form-group">
+          <button id="start" type="button" class="btn btn-primary btn-block">start</button>
+          <button id="stop" type="button" class="btn btn-primary btn-block">stop</button>
+        </div>
+
+        <!--card start-->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              Most Recent Log 
+            </div>
+            <div class="card-block">
+              <p id="output" class="card-text"></p>
+            </div>
+          </div>
+        </div>
+        <!--card end-->
 
       </div>
     </div>
