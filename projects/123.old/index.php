@@ -52,7 +52,6 @@
         });
       }
 
-      var GPS;
       function checkLog(){
         $.get('checkLog.php',function(data){
           console.log(data);
@@ -60,10 +59,7 @@
           var d = new Date(time * 1000);
           var time = d.toLocaleString();
 
-          //var GPS=data.split("|")[1].split(" ")[6];
-          $.get('gps.log',function(data){
-            GPS=data;
-          });
+          var GPS=data.split("|")[1].split(" ")[6];
           var strength=data.split("|")[2] + "|" + data.split("|")[3];
           var height=data.split("|")[4];
           $("#output").html("Height: " + height + " feet");

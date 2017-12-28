@@ -90,13 +90,17 @@ function objColor(obj){
   }else{
     //5 is 1% of 255 (about)
     var green = Math.floor((dbp * 5) );
+    if(green < 0){green = 0}
   }
+
+  if(green != 1){console.log(green)};
 
   //calculate red
   if( dbp < 50 ){
     var red = 255;
   }else{
     var red = Math.floor(255 - (dbp * 2));
+    if(red < 0){red = 0}
   }
 
 
@@ -105,6 +109,7 @@ function objColor(obj){
   //console.log( db + " " + red + " " + green + " " + 0);
   var color = new THREE.Color("rgb("+red+", "+green+", 0)");
 
+  //console.log(color);
   var material = new THREE.LineBasicMaterial( {
     color: color,
     transparent: true,
