@@ -13,7 +13,19 @@ fclose($f);
 $f = fopen("gps.log", 'r');
 $gps = fgets($f);
 fclose($f);
+/*
+$db = new SQLite3("db.sqlite");
+$table = "table1";
 
+$results = $db->query("SELECT PID FROM $table ORDER BY id DESC LIMIT 1");
+
+$rows = array();
+while($row = $results->fetchArray()) {
+  //$rows[] = $row;
+  $gps = $row['pid'];
+}
+*/
+//print json_encode($rows);
 if ($status == "true"){
   $data=$_GET['data'];
   $my_file = 'log.dat';

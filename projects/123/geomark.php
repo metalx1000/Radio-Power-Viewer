@@ -10,18 +10,20 @@
   <script type="text/javascript">
     var watchID;
     var geoLoc;
+    var latitude,longitude;
 
     getLocationUpdate();
-
+    //sendGPS();
     setInterval(getLocationUpdate,1000);
 
     function showLocation(position) {
-      var latitude = position.coords.latitude;
-      var longitude = position.coords.longitude;
+      latitude = position.coords.latitude;
+      longitude = position.coords.longitude;
       var output=document.getElementById("output");
       output.innerHTML="Latitude : " + latitude + " Longitude: " + longitude;
+      //$.get('update_db.php?pid='+latitude+","+longitude,function(data){
       $.get('gps_log.php?gps='+latitude+","+longitude,function(data){
-
+        $("#output2").html(data);
       });
     }
 
@@ -42,12 +44,19 @@
         alert("Sorry, browser does not support geolocation!");
       }
     }
+
+    function sendGPS(){
+      $.get('gps_log.php?gps='+latitude+","+longitude,function(data){
+        $("#output2").html(data);
+      }).done(sendGPS);
+    }
   </script>
 </head>
 <html>
   <body>
     <input type="button" onclick="getLocationUpdate();" value="START"/>
     <div id="output"></div>
+    <div id="output2"></div>
   </body>
 </html>
 

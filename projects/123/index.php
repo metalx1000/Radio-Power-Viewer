@@ -30,6 +30,10 @@
             $("#stop").hide();
           });
         });
+
+        $("#archive1").click(function(){
+          $("#archive").show();
+        });
       });
 
       function checkStatus(){
@@ -110,6 +114,28 @@
         <!--card end-->
 
       </div>
+      <br>
+      <br>
+      <br>
+      <br>
+        <div class="col-md-12 form-group">
+          <button id="archive1" type="button" class="btn btn-primary btn-block">Archive</button>
+        </div>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+      <br>
+        <div class="col-md-12 form-group" style="display:none" id="archive">
+          <a href="archive.php"><button type="button" class="btn btn-primary btn-block">Archive - Are you sure</button></a>
+        </div>
     </div>
 
   </body>
